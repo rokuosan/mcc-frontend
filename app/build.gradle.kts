@@ -35,19 +35,21 @@ dependencies {
     // https://mvnrepository.com/artifact/org.jetbrains.kotlin-wrappers/kotlin-extensions
     implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.312-kotlin-1.6.10")
 
+    implementation(npm("@emotion/react", "11.7.1"))
+    implementation(npm("@emotion/styled", "11.6.0"))
 }
 
 kotlin {
     js(LEGACY) {
         binaries.executable()
         browser {
-            runTask{
-                devServer=org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig.DevServer(
-                    port= 3000,
-                    proxy = mutableMapOf("/api" to mapOf("target" to "http://localhost:8080")),
-                    contentBase = mutableListOf("$buildDir/processedResources/js/main")
-                )
-            }
+//            runTask{
+//                devServer=org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig.DevServer(
+//                    port= 3000,
+//                    proxy = mutableMapOf("/api" to mapOf("target" to "http://localhost:8080")),
+//                    contentBase = mutableListOf("$buildDir/processedResources/js/main")
+//                )
+//            }
             commonWebpackConfig {
                 cssSupport.enabled = true
             }
