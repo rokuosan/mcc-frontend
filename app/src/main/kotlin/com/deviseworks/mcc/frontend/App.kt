@@ -4,7 +4,7 @@ import com.deviseworks.mcc.frontend.common.Area
 import com.deviseworks.mcc.frontend.common.Sizes
 import com.deviseworks.mcc.frontend.component.Appbar
 import com.deviseworks.mcc.frontend.component.DrawerPermanent
-import com.deviseworks.mcc.frontend.component.SampleTheme
+import com.deviseworks.mcc.frontend.common.SampleTheme
 import csstype.Auto
 import csstype.Display
 import csstype.GridTemplateAreas

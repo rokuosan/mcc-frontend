@@ -1,4 +1,4 @@
-package com.deviseworks.mcc.frontend.component
+package com.deviseworks.mcc.frontend.common
 
 import kotlinx.js.jso
 import mui.material.styles.createTheme
