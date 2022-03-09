@@ -35,8 +35,11 @@ dependencies {
     // https://mvnrepository.com/artifact/org.jetbrains.kotlin-wrappers/kotlin-extensions
     implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.312-kotlin-1.6.10")
 
-    implementation(npm("@emotion/react", "11.7.1"))
-    implementation(npm("@emotion/styled", "11.6.0"))
+    // Kotlin Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+
+    implementation(npm("@emotion/react", "11.8.1"))
+    implementation(npm("@emotion/styled", "11.8.0"))
 }
 
 kotlin {
