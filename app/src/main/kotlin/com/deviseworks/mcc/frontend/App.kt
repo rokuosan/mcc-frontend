@@ -5,6 +5,7 @@ import com.deviseworks.mcc.frontend.common.Sizes
 import com.deviseworks.mcc.frontend.component.Appbar
 import com.deviseworks.mcc.frontend.component.DrawerPermanent
 import com.deviseworks.mcc.frontend.common.SampleTheme
+import com.deviseworks.mcc.frontend.component.Content
 import csstype.Auto
 import csstype.Display
 import csstype.GridTemplateAreas
@@ -52,6 +53,7 @@ private val App = FC<Props>{
             }
             Appbar()
             DrawerPermanent()
+            Content()
         }
     }
 }
