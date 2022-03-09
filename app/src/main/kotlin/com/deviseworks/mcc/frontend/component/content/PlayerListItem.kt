@@ -1,7 +1,11 @@
 package com.deviseworks.mcc.frontend.component.content
 
+import com.deviseworks.mcc.frontend.entity.Player
 import csstype.*
 import mui.material.Box
+import mui.material.Button
+import mui.material.ButtonColor
+import mui.material.ButtonVariant
 import mui.material.Card
 import mui.material.CardContent
 import mui.material.CardMedia
@@ -19,13 +23,18 @@ import react.dom.html.ReactHTML
 |---------------------------------|
  */
 
-val PlayerListItem = FC<Props> {
+
+external interface PLayerInfoProps: Props{
+    var data: Player
+}
+
+val PlayerListItem = FC<PLayerInfoProps> { props ->
     Card{
         sx{
             marginTop = 20.px
             marginLeft = 20.px
             display = Display.flex
-            width = 400.px
+            width = 600.px
             justifyContent = JustifyContent.spaceBetween
         }
 
@@ -38,19 +47,18 @@ val PlayerListItem = FC<Props> {
             // 名前
             CardContent{
                 sx{
-                    flex = Flex(number(2.0), number(0.0), Auto.auto)
-                    alignSelf = AlignSelf.stretch
+                    flex = Flex(number(1.0), number(1.0), Auto.auto)
                 }
                 Typography{
                     component = ReactHTML.div
                     variant = "h5"
-                    + "名前"
+                    + props.data.name
                 }
                 Typography{
                     component = ReactHTML.div
                     variant = "subtitle1"
                     Color("text.secondary")
-                    + "UUID"
+                    + props.data.uuid
                 }
             }
 
@@ -58,8 +66,36 @@ val PlayerListItem = FC<Props> {
                 sx{
                     display = Display.flex
                     alignItems = AlignItems.center
-                    paddingLeft = 1.px
-                    paddingBottom = 1.px
+                    justifyContent = JustifyContent.spaceBetween
+                    paddingLeft = 2.px
+                    paddingBottom = 2.px
+                    marginLeft = 5.px
+                    marginBottom = 5.px
+                }
+                Button{
+                    variant = ButtonVariant.contained
+                    color=ButtonColor.error
+                    +"Kick"
+                }
+                Button{
+                    variant = ButtonVariant.outlined
+                    color=ButtonColor.error
+                    +"Ban"
+                }
+                Button{
+                    variant = ButtonVariant.contained
+                    color = ButtonColor.inherit
+                    +"Whisper"
+                }
+                Button{
+                    color = ButtonColor.success
+                    if(props.data.isAdmin!!){
+                        variant= ButtonVariant.contained
+                        +"Admin"
+                    }else{
+                        variant= ButtonVariant.outlined
+                        +"Member"
+                    }
                 }
             }
         }
@@ -68,7 +104,7 @@ val PlayerListItem = FC<Props> {
             sx{
                 width=151.px
             }
-            image="https://cravatar.eu/avatar/shenziii/64.png"
+            image="https://cravatar.eu/avatar/${props.data.uuid}/64.png"
         }
     }
 }
