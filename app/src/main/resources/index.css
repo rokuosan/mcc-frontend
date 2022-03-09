@@ -1,4 +1,7 @@
+/* Murecho */
 @import url('https://fonts.googleapis.com/css2?family=Murecho:wght@500;800&display=swap');
+/* Noto Sans */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;700&display=swap');
 
 *,
 *::before,
@@ -13,5 +16,5 @@
 }
 
 body{
-    font-family: 'Murecho', sans-serif;
+    font-family: 'Noto Sans JP' ,'Murecho', sans-serif;
 }
