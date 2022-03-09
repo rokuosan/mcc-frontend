@@ -38,6 +38,15 @@ dependencies {
     // Kotlin Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin-wrappers/kotlin-mui
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-mui:5.5.0-pre.314-kotlin-1.6.10")
+
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin-wrappers/kotlin-mui-icons
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-mui-icons:5.5.0-pre.314-kotlin-1.6.10")
+
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin-wrappers/kotlin-emotion
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.7.1-pre.314-kotlin-1.6.10")
+
     implementation(npm("@emotion/react", "11.8.1"))
     implementation(npm("@emotion/styled", "11.8.0"))
 }
