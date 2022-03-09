@@ -1,6 +1,7 @@
 package com.deviseworks.mcc.frontend.component
 
 import com.deviseworks.mcc.frontend.common.Area
+import csstype.FontWeight
 import csstype.integer
 import csstype.number
 import kotlinx.browser.window
@@ -45,6 +46,7 @@ val Appbar = FC<Props>{
 
                 sx{
                     flexGrow=number(1.0)
+                    fontWeight = FontWeight.bold
                 }
                 +"Minecraft Console Controller"
             }
