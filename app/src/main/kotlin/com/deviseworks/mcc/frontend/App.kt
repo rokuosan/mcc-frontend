@@ -6,6 +6,7 @@ import com.deviseworks.mcc.frontend.component.Appbar
 import com.deviseworks.mcc.frontend.component.DrawerPermanent
 import com.deviseworks.mcc.frontend.common.SampleTheme
 import com.deviseworks.mcc.frontend.component.Content
+import com.deviseworks.mcc.frontend.component.TabsModule
 import csstype.Auto
 import csstype.Display
 import csstype.GridTemplateAreas
@@ -19,6 +20,7 @@ import react.FC
 import react.Props
 import react.create
 import react.dom.render
+import react.router.dom.HashRouter
 
 fun main(){
     render(
@@ -32,28 +34,34 @@ private val App = FC<Props>{
         this.theme=SampleTheme
         CssBaseline()
 
-        Box{
-            sx{
-                display=Display.grid
+        HashRouter{
+            TabsModule{
+                Box{
+                    sx{
+                        display=Display.grid
 
-                gridTemplateRows = array(
-                    Sizes.Appbar.Height,
-                    Auto.auto
-                )
+                        gridTemplateRows = array(
+                            Sizes.Appbar.Height,
+                            Auto.auto
+                        )
 
-                gridTemplateColumns = array(
-                    Sizes.Drawer.Width,
-                    Auto.auto
-                )
+                        gridTemplateColumns = array(
+                            Sizes.Drawer.Width,
+                            Auto.auto
+                        )
 
-                gridTemplateAreas = GridTemplateAreas(
-                    arrayOf(Area.Appbar, Area.Appbar),
-                    arrayOf(Area.Drawer, Area.Content)
-                )
+                        gridTemplateAreas = GridTemplateAreas(
+                            arrayOf(Area.Appbar, Area.Appbar),
+                            arrayOf(Area.Drawer, Area.Content)
+                        )
+                    }
+
+                    Appbar()
+                    DrawerPermanent()
+                    Content()
+                }
             }
-            Appbar()
-            DrawerPermanent()
-            Content()
         }
+
     }
 }
