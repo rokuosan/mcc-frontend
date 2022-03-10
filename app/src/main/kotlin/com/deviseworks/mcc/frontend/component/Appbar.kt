@@ -32,6 +32,11 @@ val Appbar = FC<Props>{
                     flexGrow=number(1.0)
                     fontWeight = FontWeight.bold
                 }
+
+                onClick = {
+                    window.location.href=window.location.origin
+                }
+
                 +"Minecraft Console Controller"
             }
 
