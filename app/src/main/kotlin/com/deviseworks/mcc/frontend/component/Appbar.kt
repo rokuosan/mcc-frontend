@@ -16,7 +16,7 @@ import react.dom.html.ReactHTML
 
 val Appbar = FC<Props>{
     AppBar{
-        position = AppBarPosition.static
+        position = AppBarPosition.fixed
 
         sx{
             gridArea=Area.Appbar
