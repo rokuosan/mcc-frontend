@@ -1,18 +1,21 @@
 package com.deviseworks.mcc.frontend.component
 
 import com.deviseworks.mcc.frontend.common.Area
-import com.deviseworks.mcc.frontend.component.content.PlayerListItem
-import com.deviseworks.mcc.frontend.entity.Player
-import csstype.Display
-import csstype.FlexWrap
 import csstype.px
 import mui.material.Box
+import mui.material.Typography
 import mui.system.sx
 import react.FC
 import react.Props
+import react.create
 import react.dom.html.ReactHTML
+import react.router.Route
+import react.router.Routes
+import react.useContext
 
 val Content = FC<Props> {
+    val tabs = useContext(TabsContext)
+
     Box{
         component = ReactHTML.main
         sx{
@@ -20,23 +23,25 @@ val Content = FC<Props> {
             padding = 30.px
         }
 
-        val playerList = mutableListOf<Player>()
+        Routes{
+            Route{
+                path="/"
 
-        for(i in 1..100){
-            playerList.add(Player("mock-uuid-$i", "MockUser_$i", "MockUser_$i", false, "ONLINE"))
-        }
+                for((key, _, Component) in tabs){
+                    Route{
+                        path = key
+                        element = Component.create()
+                    }
+                }
 
-        Box{
-            sx{
-                display = Display.flex
-                flexWrap = FlexWrap.wrap
-            }
-
-            for(p in playerList){
-                PlayerListItem{
-                    data = p
+                Route{
+                    path = "*"
+                    element = Typography.create{
+                        + "404 Page Not Found"
+                    }
                 }
             }
         }
     }
+
 }
