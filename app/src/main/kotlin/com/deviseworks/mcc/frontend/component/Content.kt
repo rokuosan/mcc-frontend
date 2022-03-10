@@ -20,11 +20,11 @@ val Content = FC<Props> {
             padding = 30.px
         }
 
-        val playerList = mutableListOf(
-            Player("mock-uuid-1", "MockUser_001", "MockUser_001", true, "ONLINE"),
-            Player("mock-uuid-2", "MockUser_002", "MockUser_002", false, "OFFLINE"),
-            Player("mock-uuid-3", "MockUser_003", "MockUser_003", false, "OFFLINE"),
-        )
+        val playerList = mutableListOf<Player>()
+
+        for(i in 1..100){
+            playerList.add(Player("mock-uuid-$i", "MockUser_$i", "MockUser_$i", false, "ONLINE"))
+        }
 
         Box{
             sx{
