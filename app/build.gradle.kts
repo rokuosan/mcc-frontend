@@ -2,7 +2,6 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     kotlin("js") version "1.6.10"
     kotlin("plugin.serialization") version "1.6.10"
-
 }
 
 group="me.konso"
@@ -13,15 +12,15 @@ repositories {
     mavenCentral()
 }
 
+val ktorVersion = "2.0.0-beta-1"
+
 dependencies {
     // Use the Kotlin JS standard library.
     implementation(kotlin("stdlib-js"))
 
-    // Ktor Core
-    implementation("io.ktor:ktor-client-core:1.6.7")
-
-    // Ktor Client
-    implementation("io.ktor:ktor-client-cio:1.6.7")
+    // Ktor
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-serialization:$ktorVersion")
 
     // Kotlin/JS React
     implementation("org.jetbrains.kotlin-wrappers:kotlin-browser:0.0.1-pre.312-kotlin-1.6.10")
