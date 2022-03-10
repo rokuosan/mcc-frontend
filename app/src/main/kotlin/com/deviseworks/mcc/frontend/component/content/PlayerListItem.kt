@@ -1,5 +1,8 @@
 package com.deviseworks.mcc.frontend.component.content
 
+import com.deviseworks.mcc.frontend.component.DialogBuilder
+import com.deviseworks.mcc.frontend.component.DialogTemplate
+import com.deviseworks.mcc.frontend.component.DialogType
 import com.deviseworks.mcc.frontend.entity.Player
 import csstype.*
 import mui.material.Box
@@ -79,25 +82,27 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                 }
 
                 // Kick
-                Button{
-                    variant = ButtonVariant.contained
-                    color=ButtonColor.error
-                    +"Kick"
+                DialogBuilder{
+                    buttonText = "Kick"
+                    template = DialogTemplate("警告", "このプレイヤーを本当にキックしますか？")
+                    type = DialogType.KICK
+                    player = props.data
                 }
 
                 // Ban
-                Button{
-                    variant = ButtonVariant.outlined
-                    color=ButtonColor.error
-                    +"Ban"
+                DialogBuilder{
+                    buttonText = "Ban"
+                    template = DialogTemplate("警告", "このプレイヤーを本当にBANしますか？")
+                    type = DialogType.BAN
+                    player = props.data
                 }
 
                 // Whisper
-                Button{
-                    variant = ButtonVariant.contained
-                    color = ButtonColor.inherit
-                    +"Whisper"
-                }
+//                Button{
+//                    variant = ButtonVariant.contained
+//                    color = ButtonColor.inherit
+//                    +"Whisper"
+//                }
 
                 // Administrator
                 Button{
