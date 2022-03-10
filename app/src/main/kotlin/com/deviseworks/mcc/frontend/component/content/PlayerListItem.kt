@@ -44,16 +44,20 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                 flexDirection = FlexDirection.column
             }
 
-            // 名前
+            // 名前とUUID
             CardContent{
+                // Style
                 sx{
                     flex = Flex(number(1.0), number(1.0), Auto.auto)
                 }
+
+                // Name
                 Typography{
                     component = ReactHTML.div
                     variant = "h5"
                     + props.data.name
                 }
+                // UUID
                 Typography{
                     component = ReactHTML.div
                     variant = "subtitle1"
@@ -62,6 +66,7 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                 }
             }
 
+            // Controller
             Box{
                 sx{
                     display = Display.flex
@@ -72,21 +77,29 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                     marginLeft = 5.px
                     marginBottom = 5.px
                 }
+
+                // Kick
                 Button{
                     variant = ButtonVariant.contained
                     color=ButtonColor.error
                     +"Kick"
                 }
+
+                // Ban
                 Button{
                     variant = ButtonVariant.outlined
                     color=ButtonColor.error
                     +"Ban"
                 }
+
+                // Whisper
                 Button{
                     variant = ButtonVariant.contained
                     color = ButtonColor.inherit
                     +"Whisper"
                 }
+
+                // Administrator
                 Button{
                     color = ButtonColor.success
                     if(props.data.isAdmin!!){
@@ -99,12 +112,15 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                 }
             }
         }
+
+        // Minecraft Head
         CardMedia{
             component = ReactHTML.img
             sx{
                 width=151.px
             }
-            image="https://cravatar.eu/avatar/${props.data.uuid}/64.png"
+//            image="https://cravatar.eu/avatar/${props.data.uuid}/64.png"
+            image="https://cravatar.eu/avatar/steve/64.png"
         }
     }
 }
