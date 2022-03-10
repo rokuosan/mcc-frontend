@@ -24,20 +24,6 @@ val Appbar = FC<Props>{
         }
 
         Toolbar{
-//            IconButton{
-//                size = Size.large
-//                edge = IconButtonEdge.start
-//                color = IconButtonColor.inherit
-//                ariaLabel = "menu"
-//
-//                sx{
-//                    marginRight = 2.px
-//                }
-//
-//                Menu()
-//
-//            }
-
             Typography{
                 variant = "h6"
                 component = ReactHTML.div
