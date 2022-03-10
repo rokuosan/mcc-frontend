@@ -11,8 +11,6 @@ import mui.system.sx
 import react.FC
 import react.Props
 import react.ReactNode
-import react.dom.aria.AriaHasPopup
-import react.dom.aria.ariaHasPopup
 import react.dom.aria.ariaLabel
 import react.dom.html.ReactHTML
 
@@ -56,9 +54,7 @@ val Appbar = FC<Props>{
 
                 IconButton{
                     ariaLabel = "source"
-                    ariaHasPopup =AriaHasPopup.`false`
                     size = Size.large
-                    color = IconButtonColor.inherit
 
                     onClick = {
                         window.location.href = "https://github.com/rokuosan/mcc-frontend/"
