@@ -1,5 +1,6 @@
 package com.deviseworks.mcc.frontend.component.content
 
+import com.deviseworks.mcc.frontend.common.PlayerConnection
 import com.deviseworks.mcc.frontend.component.DialogBuilder
 import com.deviseworks.mcc.frontend.component.DialogTemplate
 import com.deviseworks.mcc.frontend.component.DialogType
@@ -97,15 +98,11 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                     player = props.data
                 }
 
-                // Whisper
-//                Button{
-//                    variant = ButtonVariant.contained
-//                    color = ButtonColor.inherit
-//                    +"Whisper"
-//                }
-
                 // Administrator
                 Button{
+                    sx{
+                        marginLeft = 20.px
+                    }
                     color = ButtonColor.success
                     if(props.data.isAdmin!!){
                         variant= ButtonVariant.contained
@@ -113,6 +110,22 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                     }else{
                         variant= ButtonVariant.outlined
                         +"Member"
+                    }
+                }
+
+                // Connection Status
+                Button{
+                    sx{
+                        marginLeft = 20.px
+                    }
+                    if(props.data.status == PlayerConnection.ONLINE.status){
+                        color = ButtonColor.success
+                        variant= ButtonVariant.contained
+                        +"Online"
+                    }else{
+                        color = ButtonColor.inherit
+                        variant= ButtonVariant.outlined
+                        +"Offline"
                     }
                 }
             }
