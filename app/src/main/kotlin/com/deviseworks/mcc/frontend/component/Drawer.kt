@@ -2,6 +2,7 @@ package com.deviseworks.mcc.frontend.component
 
 import com.deviseworks.mcc.frontend.common.Area
 import com.deviseworks.mcc.frontend.common.Sizes
+import csstype.AlignSelf
 import csstype.Color
 import csstype.None
 import mui.icons.material.ListAltOutlined
@@ -49,6 +50,9 @@ val DrawerPermanent = FC<Props>{
                             selected = key == lastPathname
 
                             ListItemIcon{
+                                sx{
+                                    alignSelf=AlignSelf.selfEnd
+                                }
                                 when(key){
                                     "player" -> {
                                         PeopleAltOutlined()
