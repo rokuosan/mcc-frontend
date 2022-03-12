@@ -2,12 +2,16 @@ package com.deviseworks.mcc.frontend.component.content
 
 import com.deviseworks.mcc.frontend.common.API
 import com.deviseworks.mcc.frontend.entity.Player
+import csstype.Display
+import csstype.FlexWrap
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.await
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
+import mui.material.Box
+import mui.system.sx
 import react.FC
 import react.Props
 import react.useEffectOnce
@@ -22,9 +26,16 @@ val PlayerListTab = FC<Props> {
         }
     }
 
-    playerList.forEachIndexed{ _, p ->
-        PlayerListItem{
-            data = p
+    Box{
+        sx{
+            display = Display.flex
+            flexWrap = FlexWrap.wrap
+        }
+
+        playerList.forEachIndexed { _, player ->
+            PlayerListItem{
+                data = player
+            }
         }
     }
 }
