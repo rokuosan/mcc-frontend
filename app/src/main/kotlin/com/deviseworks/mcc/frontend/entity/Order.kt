@@ -33,6 +33,13 @@ data class Order(
     var isCanceled: Boolean? = null
 )
 
+@kotlinx.serialization.Serializable
+data class PreOrder(
+    @SerialName("command")
+    var command: String? = null,
+    @SerialName("sender")
+    var sender: String? = null
+)
 
 /* 想定データ形式
 id,

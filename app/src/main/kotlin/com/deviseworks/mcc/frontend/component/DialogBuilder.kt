@@ -1,7 +1,22 @@
 package com.deviseworks.mcc.frontend.component
 
+import com.deviseworks.mcc.frontend.common.API
 import com.deviseworks.mcc.frontend.entity.Player
+import com.deviseworks.mcc.frontend.entity.PreOrder
 import csstype.px
+import io.ktor.client.*
+import io.ktor.client.engine.js.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import kotlinx.browser.window
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import mui.material.Button
 import mui.material.ButtonColor
 import mui.material.ButtonVariant
@@ -32,6 +47,14 @@ external interface DialogBuilderProps: Props{
     var template: DialogTemplate
     var type: DialogType
     var player: Player?
+}
+
+private val mainScope = MainScope()
+
+private val client = HttpClient(Js){
+    install(JsonFeature){
+        serializer = KotlinxSerializer()
+    }
 }
 
 val DialogBuilder = FC<DialogBuilderProps> { props ->
@@ -93,6 +116,15 @@ val DialogBuilder = FC<DialogBuilderProps> { props ->
                             Button{
                                 onClick = {
                                     // ここにBAN処理を書く
+                                    val preOrder = PreOrder(
+                                        command = "ban ${props.player?.name}",
+                                        sender = "test_user"
+                                    )
+
+                                    mainScope.launch {
+                                        sendPreOrder(preOrder)
+                                    }
+
                                     setOpenStatus(false)
                                 }
                                 + "はい"
@@ -101,7 +133,16 @@ val DialogBuilder = FC<DialogBuilderProps> { props ->
                         DialogType.KICK -> {
                             Button{
                                 onClick = {
-                                    // ここにBAN処理を書く
+                                    // ここにKICK処理を書く
+                                    val preOrder = PreOrder(
+                                        command = "kick ${props.player?.name}",
+                                        sender = "test_user"
+                                    )
+
+                                    mainScope.launch {
+                                        sendPreOrder(preOrder)
+                                    }
+
                                     setOpenStatus(false)
                                 }
                                 + "はい"
@@ -110,7 +151,24 @@ val DialogBuilder = FC<DialogBuilderProps> { props ->
                         DialogType.OP -> {
                             Button{
                                 onClick = {
-                                    // ここにBAN処理を書く
+                                    // ここにOP処理を書く
+
+                                    val preOrder = if(props.player?.isAdmin!!){
+                                        PreOrder(
+                                            command = "deop ${props.player?.name}",
+                                            sender = "test_user"
+                                        )
+                                    }else {
+                                        PreOrder(
+                                            command = "op ${props.player?.name}",
+                                            sender = "test_user"
+                                        )
+                                    }
+
+                                    mainScope.launch {
+                                        sendPreOrder(preOrder)
+                                    }
+
                                     setOpenStatus(false)
                                 }
                                 + "はい"
@@ -120,5 +178,19 @@ val DialogBuilder = FC<DialogBuilderProps> { props ->
                 }
             }
         }
+    }
+}
+
+suspend fun sendPreOrder(order: PreOrder){
+    val deferred = mainScope.async<HttpResponse> {
+        client.post(API.SERVER_COMMAND){
+            body = Json.encodeToString(order)
+        }
+    }
+
+    if(deferred.await().status != HttpStatusCode.Created){
+        window.alert("リクエストの送信に失敗しました")
+    }else{
+        window.alert("リクエストを送信しました")
     }
 }
