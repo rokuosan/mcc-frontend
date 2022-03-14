@@ -1,6 +1,7 @@
 package com.deviseworks.mcc.frontend.component
 
 import com.deviseworks.mcc.frontend.entity.Player
+import csstype.px
 import mui.material.Button
 import mui.material.ButtonColor
 import mui.material.ButtonVariant
@@ -9,6 +10,7 @@ import mui.material.DialogActions
 import mui.material.DialogContent
 import mui.material.DialogContentText
 import mui.material.DialogTitle
+import mui.system.sx
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML.div
@@ -16,7 +18,8 @@ import react.useState
 
 enum class DialogType{
     BAN,
-    KICK
+    KICK,
+    OP
 }
 
 data class DialogTemplate(
@@ -34,17 +37,34 @@ external interface DialogBuilderProps: Props{
 val DialogBuilder = FC<DialogBuilderProps> { props ->
     val (openStatus, setOpenStatus) = useState(false)
 
+    var c:ButtonColor = ButtonColor.primary // ボタン色
+    var v:ButtonVariant = ButtonVariant.outlined // ボタン
+    var leftMargin = 0.px
+
+    when(props.type){
+        DialogType.KICK -> {
+            c = ButtonColor.primary
+            v = ButtonVariant.outlined
+        }
+        DialogType.BAN -> {
+            c = ButtonColor.error
+            v = ButtonVariant.outlined
+        }
+        DialogType.OP -> {
+            c = ButtonColor.success
+            v = if(props.player!!.isAdmin!!) ButtonVariant.contained else ButtonVariant.outlined
+            leftMargin = 20.px
+        }
+    }
+
+
     div{
         Button{
-            variant = ButtonVariant.outlined
-            color = when(props.type){
-                DialogType.KICK -> {
-                    ButtonColor.primary
-                }
-                DialogType.BAN -> {
-                    ButtonColor.error
-                }
+            sx {
+                marginLeft = leftMargin
             }
+            variant = v
+            color = c
             onClick ={ setOpenStatus(true) }
             + props.buttonText
         }
@@ -61,16 +81,14 @@ val DialogBuilder = FC<DialogBuilderProps> { props ->
                     +props.template.content
                 }
                 DialogActions{
-                    // 否定
                     Button{
                         autoFocus = true
                         onClick = { setOpenStatus(false) }
                         + "いいえ"
                     }
 
-                    // 肯定
+                    // 各ボタンと処理を書く
                     when(props.type){
-
                         DialogType.BAN -> {
                             Button{
                                 onClick = {
@@ -80,11 +98,19 @@ val DialogBuilder = FC<DialogBuilderProps> { props ->
                                 + "はい"
                             }
                         }
-
                         DialogType.KICK -> {
                             Button{
                                 onClick = {
-                                    // ここにKICK処理を書く
+                                    // ここにBAN処理を書く
+                                    setOpenStatus(false)
+                                }
+                                + "はい"
+                            }
+                        }
+                        DialogType.OP -> {
+                            Button{
+                                onClick = {
+                                    // ここにBAN処理を書く
                                     setOpenStatus(false)
                                 }
                                 + "はい"
