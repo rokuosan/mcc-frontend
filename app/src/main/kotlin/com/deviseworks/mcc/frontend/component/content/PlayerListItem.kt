@@ -61,6 +61,13 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                     variant = "h5"
                     + props.data.name
                 }
+                // DisplayName
+                Typography{
+                    component = ReactHTML.div
+                    variant = "subtitle1"
+                    Color("text.secondary")
+                    +(if (props.data.displayName.isNullOrBlank()) "" else props.data.displayName)!!
+                }
                 // UUID
                 Typography{
                     component = ReactHTML.div
@@ -99,18 +106,17 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
                 }
 
                 // Administrator
-                Button{
-                    sx{
-                        marginLeft = 20.px
-                    }
-                    color = ButtonColor.success
-                    if(props.data.isAdmin!!){
-                        variant= ButtonVariant.contained
-                        +"Admin"
+                DialogBuilder{
+                    val message = if(props.data.isAdmin!!){
+                        "本当にOP権限を剥奪しますか？"
                     }else{
-                        variant= ButtonVariant.outlined
-                        +"Member"
+                        "本当にOP権限を付与しますか？大いなる力には大いなる責任を伴います。"
                     }
+
+                    buttonText = if(props.data.isAdmin!!) "ADMIN" else "Member"
+                    template = DialogTemplate("警告", message)
+                    type = DialogType.OP
+                    player = props.data
                 }
 
                 // Connection Status
@@ -137,8 +143,8 @@ val PlayerListItem = FC<PLayerInfoProps> { props ->
             sx{
                 width=151.px
             }
-//            image="https://cravatar.eu/avatar/${props.data.uuid}/64.png"
-            image="https://cravatar.eu/avatar/steve/64.png"
+            image="https://cravatar.eu/avatar/${props.data.uuid}/64.png"
+//            image="https://cravatar.eu/avatar/steve/64.png"
         }
     }
 }
