@@ -57,7 +57,7 @@ val DrawerPermanent = FC<Props>{
                                     "player" -> {
                                         PeopleAltOutlined()
                                     }
-                                    "console" -> {
+                                    "server" -> {
                                         ListAltOutlined()
                                     }
                                     "etc" -> {
